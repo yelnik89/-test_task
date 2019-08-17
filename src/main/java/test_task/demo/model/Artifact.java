@@ -1,34 +1,43 @@
 package test_task.demo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.dom4j.tree.AbstractEntity;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.UUID;
+import java.text.MessageFormat;
 
 @Entity
+@EntityListeners({ Artifact.AbstractEntityListener.class })
 public class Artifact {
 
     @Id
-    @GeneratedValue
-    private long id;
-
-    private Integer created;
+    @Column(length = 36)
+    private String id;
+    private Date created;
     private String userID;
+    private String category;
     private String description;
 
 
     protected Artifact(){}
 
-    public Artifact(String userID, String description) {
+    public Artifact(Date created, String userID, String category, String description) {
+        this.created = created;
         this.userID = userID;
+        this.category = category;
         this.description = description;
     }
 
-    public Integer getCreated(){
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Date getCreated(){
         return this.created;
     }
 
-    public void setCreated(Integer created){
+    public void setCreated(Date created){
         this.created = created;
     }
 
@@ -48,7 +57,30 @@ public class Artifact {
         this.description = description;
     }
 
-    public long getId(){
+    public String getCategory(){
+        return this.category;
+    }
+
+    public String getId(){
         return this.id;
+    }
+
+    @Override
+    public String toString() {
+        String s = MessageFormat.format("'{' id: ''{1}'', super: ''{0}'' '}'", super.toString(), id);
+        return s;
+    }
+
+    String uid() {
+        if (id == null) {
+            id = UUID.randomUUID().toString();
+        }
+
+        return id;
+    }
+
+    public static class AbstractEntityListener {
+        @PrePersist // Аннотация PrePersist указывает, что данный метод будет выполняться каждый раз при вставке новой записи в таблицу
+        public void onPrePersist(Artifact artifactEntity) { artifactEntity.uid(); } // А данный метод генерирует ID'шник)
     }
 }
