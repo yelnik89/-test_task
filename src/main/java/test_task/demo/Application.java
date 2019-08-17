@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import test_task.demo.controller.ArtifactRepository;
+import test_task.demo.model.Artifact;
 
 @SpringBootApplication
 public class Application {
@@ -43,7 +45,7 @@ public class Application {
                         log.info("");
                     });
 
-            // fetch customers by last name
+            // fetch customers by Description
             log.info("Customer found with findByLastName('Bauer'):");
             log.info("--------------------------------------------");
             repository.findByDescription("Bauer").forEach(bauer -> {

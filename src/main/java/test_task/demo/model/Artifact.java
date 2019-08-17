@@ -1,4 +1,4 @@
-package test_task.demo;
+package test_task.demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +24,14 @@ public class Artifact {
         this.description = description;
     }
 
+    public Integer getCreated(){
+        return this.created;
+    }
+
+    public void setCreated(Integer created){
+        this.created = created;
+    }
+
     public String getUserID() {
         return userID;
     }
@@ -42,11 +50,5 @@ public class Artifact {
 
     public long getId(){
         return this.id;
-    }
-
-    @Override
-    public String toString(){
-        return String.format(
-                "Artifact[id=%d, userID='%s', description='%s'");
     }
 }
