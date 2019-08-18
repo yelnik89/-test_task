@@ -73,16 +73,14 @@ public class MainRestController {
 //        return artifactService.updateArtifact(art);
 //    }
 
-    // URL:
-    // http://localhost:8080/SomeContextPath/employee/{empNo}
-//    @RequestMapping(value = "/employee/{artID}",
-//            method = RequestMethod.DELETE,
-//            produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-//    @ResponseBody
-//    public void deleteArtifact(@PathVariable("artID") String artID) {     //возможно стоит вернуть надпись, удалено/не удалено
-//
-//        System.out.println("(Service Side) Deleting artifact: " + artID);
-//
-//        artifactService.deleteArtifact(artID);
-//    }
+//     URL:
+//     http://localhost:8080/SomeContextPath/employee/{empNo}
+    @DeleteMapping(value = "/employee/{id}")
+    @ResponseBody
+    public void deleteArtifact(@PathVariable("id") String id) {     //возможно стоит вернуть надпись, удалено/не удалено
+
+        System.out.println("(Service Side) Deleting artifact: " + id);
+
+        artifactService.delete(id);
+    }
 }
