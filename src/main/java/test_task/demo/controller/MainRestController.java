@@ -53,20 +53,15 @@ public class MainRestController {
     }
 
     // URL:
-    // http://localhost:8080/SomeContextPath/employee
-    // http://localhost:8080/SomeContextPath/employee.xml
-    // http://localhost:8080/SomeContextPath/employee.json
-//    @RequestMapping(value = "/employee", //
-//            method = RequestMethod.PUT, //
-//            produces = { MediaType.APPLICATION_JSON_VALUE, //
-//                    MediaType.APPLICATION_XML_VALUE })
-//    @ResponseBody
-//    public Artifact updateArtifact(@RequestBody Artifact art) {
-//
-//        System.out.println("(Service Side) Editing employee: " + art.getEmpNo());
-//
-//        return artifactService.updateArtifact(art);
-//    }
+    // http://localhost:8080/SomeContextPath/artifact
+    @PutMapping(value = "/artifact/{id}")
+    @ResponseBody
+    public Artifact updateArtifact(@RequestBody Artifact art, @PathVariable("id") String id) {
+
+        System.out.println("(Service Side) Editing artifact: " + art.getId());
+
+        return artifactService.update(id, art);
+    }
 
 //     URL:
 //     http://localhost:8080/SomeContextPath/artifact/{id}
