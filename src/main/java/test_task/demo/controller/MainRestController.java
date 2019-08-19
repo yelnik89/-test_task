@@ -46,7 +46,9 @@ public class MainRestController {
     @PostMapping(value = "/artifact")
     @ResponseBody
     public Artifact addArtifact(@RequestBody Artifact art) {
+
         System.out.println("(Service Side) Creating artifact: " + art.getId());
+
         return artifactService.create(art);
     }
 
