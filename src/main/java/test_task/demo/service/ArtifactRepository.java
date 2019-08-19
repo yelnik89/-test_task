@@ -1,4 +1,4 @@
-package test_task.demo.dao;
+package test_task.demo.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

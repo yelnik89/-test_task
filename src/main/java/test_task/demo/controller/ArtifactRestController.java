@@ -3,13 +3,12 @@ package test_task.demo.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
-import test_task.demo.dao.ArtifactService;
+import test_task.demo.service.ArtifactService;
 import test_task.demo.model.Artifact;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 
 @RestController
-public class MainRestController {
+public class ArtifactRestController {
 
     @Autowired
     private ArtifactService artifactService;
@@ -21,9 +20,7 @@ public class MainRestController {
     }
 
     // URL:
-    // http://localhost:8080/SomeContextPath/artifact
-    // http://localhost:8080/SomeContextPath/employees.xml
-    // http://localhost:8080/SomeContextPath/employees.json
+    // http://localhost:8080/artifact
     @GetMapping(value = "/artifact")
     @ResponseBody
     public List<Artifact> getArtifacts() {
@@ -31,9 +28,7 @@ public class MainRestController {
     }
 
     // URL:
-    // http://localhost:8080/SomeContextPath/employee/{empNo}
-    // http://localhost:8080/SomeContextPath/employee/{empNo}.xml
-    // http://localhost:8080/SomeContextPath/employee/{empNo}.json
+    // http://localhost:8080/artifact/{id}
     @GetMapping("/artifact/{id}")
     @ResponseBody
     public Artifact getArtifact(@PathVariable("id") String id) {
@@ -41,7 +36,7 @@ public class MainRestController {
     }
 
     // URL:
-    // http://localhost:8080/SomeContextPath/artifact
+    // http://localhost:8080/artifact
 
     @PostMapping(value = "/artifact")
     @ResponseBody
@@ -53,7 +48,7 @@ public class MainRestController {
     }
 
     // URL:
-    // http://localhost:8080/SomeContextPath/artifact
+    // http://localhost:8080/artifact
     @PutMapping(value = "/artifact/{id}")
     @ResponseBody
     public Artifact updateArtifact(@RequestBody Artifact art, @PathVariable("id") String id) {
@@ -64,7 +59,7 @@ public class MainRestController {
     }
 
 //     URL:
-//     http://localhost:8080/SomeContextPath/artifact/{id}
+//     http://localhost:8080/artifact/{id}
     @DeleteMapping(value = "/artifact/{id}")
     @ResponseBody
     public void deleteArtifact(@PathVariable("id") String id) {     //возможно стоит вернуть надпись, удалено/не удалено

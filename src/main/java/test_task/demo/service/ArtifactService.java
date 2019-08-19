@@ -1,16 +1,11 @@
-package test_task.demo.dao;
+package test_task.demo.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import test_task.demo.model.Artifact;
-import org.springframework.stereotype.Repository;
 
 @Service
 public class ArtifactService {

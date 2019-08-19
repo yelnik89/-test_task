@@ -1,31 +1,30 @@
 package test_task.demo.model;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.UUID;
 import java.text.MessageFormat;
 
 @Entity
-@EntityListeners({ Artifact.AbstractEntityListener.class })
-public class Artifact {
+@EntityListeners({ Comment.AbstractEntityListener.class })
+public class Comment {
 
     @Id
-    @OneToMany(mappedBy = "artifactID")
     @Column(length = 36)
     private String id;
-    private Date created;
+
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private Artifact artifactID;
     private String userID;
-    private String category;
-    private String description;
+    private String content;
 
 
-    protected Artifact(){}
+    protected Comment(){}
 
-    public Artifact(Date created, String userID, String category, String description) {
-        this.created = created;
+    public Comment(Artifact artifactID, String userID, String content) {
+        this.artifactID = artifactID;
         this.userID = userID;
-        this.category = category;
-        this.description = description;
+        this.content = content;
     }
 
     public void setId(String id) {
@@ -36,33 +35,30 @@ public class Artifact {
         return this.id;
     }
 
-    public Date getCreated(){
-        return this.created;
+    public void setArtifactID(Artifact artifactID) {
+        this.artifactID = artifactID;
     }
 
-    public void setCreated(Date created){
-        this.created = created;
+    public Artifact getArtifactID(){
+        return this.artifactID;
     }
 
-    public String getUserID() {
-        return userID;
+    public void setUserID(String id) {
+        this.userID = id;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public String getUserID(){
+        return this.userID;
     }
 
-    public String getDescription() {
-        return description;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getContent(){
+        return this.content;
     }
 
-    public String getCategory(){
-        return this.category;
-    }
 
     @Override
     public String toString() {
@@ -83,3 +79,7 @@ public class Artifact {
         public void onPrePersist(Artifact artifactEntity) { artifactEntity.uid(); } // А данный метод генерирует ID'шник)
     }
 }
+
+
+
+
