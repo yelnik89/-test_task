@@ -26,7 +26,7 @@ public class MainRestController {
     // http://localhost:8080/SomeContextPath/employees.json
     @GetMapping(value = "/artifact")
     @ResponseBody
-    public List<Artifact> getEmployees() {
+    public List<Artifact> getArtifacts() {
         return artifactService.getAllArtifacts();
     }
 
@@ -36,26 +36,19 @@ public class MainRestController {
     // http://localhost:8080/SomeContextPath/employee/{empNo}.json
     @GetMapping("/artifact/{id}")
     @ResponseBody
-    public Artifact getEmployee(@PathVariable("id") String id) {
+    public Artifact getArtifact(@PathVariable("id") String id) {
         return artifactService.getArtifactById(id);
     }
 
     // URL:
-    // http://localhost:8080/SomeContextPath/employee
-    // http://localhost:8080/SomeContextPath/employee.xml
-    // http://localhost:8080/SomeContextPath/employee.json
+    // http://localhost:8080/SomeContextPath/artifact
 
-//    @RequestMapping(value = "/employee", //
-//            method = RequestMethod.POST, //
-//            produces = { MediaType.APPLICATION_JSON_VALUE, //
-//                    MediaType.APPLICATION_XML_VALUE })
-//    @ResponseBody
-//    public Artifact addArtifact(@RequestBody Artifact art) {
-//
-//        System.out.println("(Service Side) Creating employee: " + art.getEmpNo());
-//
-//        return artifactService.addArtifact(art);
-//    }
+    @PostMapping(value = "/artifact")
+    @ResponseBody
+    public Artifact addArtifact(@RequestBody Artifact art) {
+        System.out.println("(Service Side) Creating artifact: " + art.getId());
+        return artifactService.create(art);
+    }
 
     // URL:
     // http://localhost:8080/SomeContextPath/employee
@@ -74,8 +67,8 @@ public class MainRestController {
 //    }
 
 //     URL:
-//     http://localhost:8080/SomeContextPath/employee/{empNo}
-    @DeleteMapping(value = "/employee/{id}")
+//     http://localhost:8080/SomeContextPath/artifact/{id}
+    @DeleteMapping(value = "/artifact/{id}")
     @ResponseBody
     public void deleteArtifact(@PathVariable("id") String id) {     //возможно стоит вернуть надпись, удалено/не удалено
 
