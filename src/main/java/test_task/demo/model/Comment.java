@@ -1,5 +1,7 @@
 package test_task.demo.model;
 
+import test_task.demo.service.ArtifactService;
+
 import javax.persistence.*;
 import java.util.UUID;
 import java.text.MessageFormat;
@@ -11,21 +13,14 @@ public class Comment {
     @Id
     @Column(length = 36)
     private String id;
-
-    @ManyToOne
-    @JoinColumn
-    private Artifact artifactID;
     private String userID;
     private String content;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", nullable = false)
+    private Artifact artifactID;
 
-    protected Comment(){}
-
-    public Comment(Artifact artifactID, String userID, String content) {
-        this.artifactID = artifactID;
-        this.userID = userID;
-        this.content = content;
-    }
+    public Comment(){}
 
     public void setId(String id) {
         this.id = id;
@@ -35,12 +30,12 @@ public class Comment {
         return this.id;
     }
 
-    public void setArtifactID(Artifact artifactID) {
-        this.artifactID = artifactID;
+    public Artifact getArtifactID() {
+        return artifactID;
     }
 
-    public Artifact getArtifactID(){
-        return this.artifactID;
+    public void setArtifactID(Artifact artifactID) {
+        this.artifactID = artifactID;
     }
 
     public void setUserID(String id) {
@@ -76,7 +71,7 @@ public class Comment {
 
     public static class AbstractEntityListener {
         @PrePersist // Аннотация PrePersist указывает, что данный метод будет выполняться каждый раз при вставке новой записи в таблицу
-        public void onPrePersist(Artifact artifactEntity) { artifactEntity.uid(); } // А данный метод генерирует ID'шник)
+        public void onPrePersist(Comment commentEntity) { commentEntity.uid(); } // А данный метод генерирует ID'шник)
     }
 }
 

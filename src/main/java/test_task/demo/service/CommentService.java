@@ -9,7 +9,6 @@ import test_task.demo.model.Comment;
 
 @Service
 public class CommentService {
-
     @Autowired
     private CommentRepository commentRepository;
 

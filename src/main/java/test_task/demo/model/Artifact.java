@@ -2,6 +2,7 @@ package test_task.demo.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.text.MessageFormat;
@@ -20,22 +21,30 @@ public class Artifact {
     private String category;
     private String description;
 
+//    @OneToMany(mappedBy = "", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "artifactID", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Comment> comment = new HashSet<>();
 
-    @OneToMany(mappedBy = "artifactID")
-    private Set<Comment> comment;
 
+    public Artifact(){}
 
-    protected Artifact(){}
-
-    public Artifact(Date created, String userID, String category, String description, Comment... comments) {
-        this.created = created;
-        this.userID = userID;
-        this.category = category;
-        this.description = description;
-    }
+//    public Artifact(Date created, String userID, String category, String description) {
+//        this.created = created;
+//        this.userID = userID;
+//        this.category = category;
+//        this.description = description;
+//    }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Set<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(Set<Comment> comment) {
+        this.comment = comment;
     }
 
     public String getId(){
@@ -64,6 +73,10 @@ public class Artifact {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getCategory(){
