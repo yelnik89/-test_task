@@ -13,7 +13,7 @@ public class Comment {
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn
     private Artifact artifactID;
     private String userID;
     private String content;

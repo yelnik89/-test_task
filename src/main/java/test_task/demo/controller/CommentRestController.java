@@ -18,7 +18,7 @@ public class CommentRestController {
     @GetMapping(value = "/comment")
     @ResponseBody
     public List<Comment> getComments() {
-        return CommentService.getAllComments();
+        return commentService.getAllComments();
     }
 
     // URL:
@@ -26,7 +26,7 @@ public class CommentRestController {
     @GetMapping("/artifact/{id}")
     @ResponseBody
     public Comment getComment(@PathVariable("id") String id) {
-        return CommentService.getCommentById(id);
+        return commentService.getCommentById(id);
     }
 
     // URL:
@@ -38,7 +38,7 @@ public class CommentRestController {
 
         System.out.println("(Service Side) Creating artifact: " + art.getId());
 
-        return CommentService.create(art);
+        return commentService.create(art);
     }
 
     // URL:
@@ -49,7 +49,7 @@ public class CommentRestController {
 
         System.out.println("(Service Side) Editing artifact: " + art.getId());
 
-        return CommentService.update(id, art);
+        return commentService.update(id, art);
     }
 
     //     URL:
@@ -60,6 +60,6 @@ public class CommentRestController {
 
         System.out.println("(Service Side) Deleting artifact: " + id);
 
-        CommentService.delete(id);
+        commentService.delete(id);
     }
 }

@@ -2,15 +2,17 @@ package test_task.demo.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 import java.text.MessageFormat;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @EntityListeners({ Artifact.AbstractEntityListener.class })
 public class Artifact {
 
     @Id
-    @OneToMany(mappedBy = "artifactID")
     @Column(length = 36)
     private String id;
     private Date created;
@@ -19,9 +21,13 @@ public class Artifact {
     private String description;
 
 
+    @OneToMany(mappedBy = "artifactID")
+    private Set<Comment> comment;
+
+
     protected Artifact(){}
 
-    public Artifact(Date created, String userID, String category, String description) {
+    public Artifact(Date created, String userID, String category, String description, Comment... comments) {
         this.created = created;
         this.userID = userID;
         this.category = category;
