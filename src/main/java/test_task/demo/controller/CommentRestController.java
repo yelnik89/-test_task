@@ -14,7 +14,7 @@ public class CommentRestController {
     private CommentService commentService;
 
     // URL:
-    // http://localhost:8080/artifact
+    // http://localhost:8080/comment
     @GetMapping(value = "/comment")
     @ResponseBody
     public List<Comment> getComments() {
@@ -22,43 +22,43 @@ public class CommentRestController {
     }
 
     // URL:
-    // http://localhost:8080/artifact/{id}
-    @GetMapping("/artifact/{id}")
+    // http://localhost:8080/comment/{id}
+    @GetMapping("/comment/{id}")
     @ResponseBody
     public Comment getComment(@PathVariable("id") String id) {
         return commentService.getCommentById(id);
     }
 
     // URL:
-    // http://localhost:8080/artifact
+    // http://localhost:8080/comment
 
-    @PostMapping(value = "/artifact")
+    @PostMapping(value = "/comment")
     @ResponseBody
-    public Comment addArtifact(@RequestBody Comment art) {
+    public Comment addComment(@RequestBody Comment com) {
 
-        System.out.println("(Service Side) Creating artifact: " + art.getId());
+        System.out.println("(Service Side) Creating artifact: " + com.getId());
 
-        return commentService.create(art);
+        return commentService.create(com);
     }
 
     // URL:
-    // http://localhost:8080/artifact
-    @PutMapping(value = "/artifact/{id}")
+    // http://localhost:8080/comment
+    @PutMapping(value = "/comment/{id}")
     @ResponseBody
-    public Comment updateArtifact(@RequestBody Comment art, @PathVariable("id") String id) {
+    public Comment updateComment(@RequestBody Comment com, @PathVariable("id") String id) {
 
-        System.out.println("(Service Side) Editing artifact: " + art.getId());
+        System.out.println("(Service Side) Editing artifact: " + com.getId());
 
-        return commentService.update(id, art);
+        return commentService.update(id, com);
     }
 
     //     URL:
-//     http://localhost:8080/artifact/{id}
-    @DeleteMapping(value = "/artifact/{id}")
+//     http://localhost:8080/comment/{id}
+    @DeleteMapping(value = "/comment/{id}")
     @ResponseBody
-    public void deleteArtifact(@PathVariable("id") String id) {     //возможно стоит вернуть надпись, удалено/не удалено
+    public void deleteComment(@PathVariable("id") String id) {     //возможно стоит вернуть надпись, удалено/не удалено
 
-        System.out.println("(Service Side) Deleting artifact: " + id);
+        System.out.println("(Service Side) Deleting comment: " + id);
 
         commentService.delete(id);
     }
