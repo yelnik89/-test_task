@@ -1,11 +1,16 @@
 package test_task.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import test_task.demo.service.ArtifactService;
 import test_task.demo.model.Artifact;
 import org.springframework.beans.factory.annotation.Autowired;
+import test_task.demo.specification.SearchCriteria;
 
 @RestController
 public class ArtifactRestController {
@@ -30,6 +35,11 @@ public class ArtifactRestController {
     @GetMapping("/artifact/{id}")
     public ResponseEntity<Artifact> getArtifact(@PathVariable("id") String id) {
         return ResponseEntity.ok(artifactService.getArtifactById(id));
+    }
+
+    @GetMapping("/artifact/search")
+    public List<Artifact> findAll(@RequestParam(value = "search") String search){
+        return artifactService.findAll(search);
     }
 
     // URL:
