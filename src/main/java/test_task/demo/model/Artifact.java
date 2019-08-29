@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Entity
-@EntityListeners({ Artifact.AbstractEntityListener.class })
+@EntityListeners({AbstractEntityListener.class })
 public class Artifact {
 
     @Id
@@ -95,10 +95,5 @@ public class Artifact {
         }
 
         return id;
-    }
-
-    public static class AbstractEntityListener {
-        @PrePersist // Аннотация PrePersist указывает, что данный метод будет выполняться каждый раз при вставке новой записи в таблицу
-        public void onPrePersist(Artifact artifactEntity) { artifactEntity.uid(); } // А данный метод генерирует ID'шник)
     }
 }

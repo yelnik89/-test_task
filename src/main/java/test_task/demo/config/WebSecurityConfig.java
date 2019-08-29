@@ -32,10 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> mngConfig = auth.inMemoryAuthentication();
 
         UserDetails u1 = User.withUsername("tom").password(encrytedPassword).roles("USER").build();
-        UserDetails u2 = User.withUsername("jerry").password(encrytedPassword).roles("USER").build();
 
         mngConfig.withUser(u1);
-        mngConfig.withUser(u2);
     }
 
     @Override

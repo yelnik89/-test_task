@@ -7,7 +7,7 @@ import java.util.UUID;
 import java.text.MessageFormat;
 
 @Entity
-@EntityListeners({ Comment.AbstractEntityListener.class })
+@EntityListeners({ AbstractEntityListener.class })
 public class Comment {
 
     @Id
@@ -68,11 +68,11 @@ public class Comment {
 
         return id;
     }
-
-    public static class AbstractEntityListener {
-        @PrePersist // Аннотация PrePersist указывает, что данный метод будет выполняться каждый раз при вставке новой записи в таблицу
-        public void onPrePersist(Comment commentEntity) { commentEntity.uid(); } // А данный метод генерирует ID'шник)
-    }
+//
+//    public static class AbstractEntityListener {
+//        @PrePersist // Аннотация PrePersist указывает, что данный метод будет выполняться каждый раз при вставке новой записи в таблицу
+//        public void onPrePersist(Comment commentEntity) { commentEntity.uid(); } // А данный метод генерирует ID'шник)
+//    }
 }
 
 
