@@ -22,7 +22,7 @@ public class Artifact {
     private String description;
 
 //    @OneToMany(mappedBy = "", fetch = FetchType.LAZY)
-    @OneToMany(mappedBy = "artifactID", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "artifactID", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Comment> comment = new HashSet<>();
 
 

@@ -37,9 +37,19 @@ public class ArtifactRestController {
         return ResponseEntity.ok(artifactService.getArtifactById(id));
     }
 
+    // URL:
+    // http://localhost:8080/artifact?search=/search params/
     @GetMapping("/artifact/search")
-    public List<Artifact> findAll(@RequestParam(value = "search") String search){
-        return artifactService.findAll(search);
+    public List<Artifact> findAll(@RequestParam(value = "search", required = false) String search){
+        List<SearchCriteria> params = new ArrayList<SearchCriteria>();
+        if (search != null){
+            Pattern pattern = Pattern.compile("(\\w+)(:|<|>)(\\w+),?");
+            Matcher matcher = pattern.matcher(search);
+            while (matcher.find()){
+                params.add(new SearchCriteria(matcher.group(1), matcher.group(2), matcher.group(3)));
+            }
+        }
+        return artifactService.searchArtifact(params);
     }
 
     // URL:
