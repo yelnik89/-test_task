@@ -1,5 +1,7 @@
 package test_task.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,6 +25,7 @@ public class Artifact {
 
 //    @OneToMany(mappedBy = "", fetch = FetchType.LAZY)
     @OneToMany(mappedBy = "artifactID", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<Comment> comment = new HashSet<>();
 
 

@@ -1,5 +1,6 @@
 package test_task.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import test_task.demo.service.ArtifactService;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Comment {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(referencedColumnName = "id", nullable = false)
     private Artifact artifactID;
 
