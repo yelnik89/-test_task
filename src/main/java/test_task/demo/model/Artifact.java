@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Entity
-@EntityListeners({AbstractEntityListener.class })
+@EntityListeners({Artifact.AbstractEntityListener.class })
 public class Artifact {
 
     @Id
@@ -24,7 +24,7 @@ public class Artifact {
     private String description;
 
 //    @OneToMany(mappedBy = "", fetch = FetchType.LAZY)
-    @OneToMany(mappedBy = "artifactID", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "artifactID", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Comment> comment = new HashSet<>();
 
@@ -98,5 +98,11 @@ public class Artifact {
         }
 
         return id;
+    }
+
+
+    public static class AbstractEntityListener {
+        @PrePersist // Аннотация PrePersist указывает, что данный метод будет выполняться каждый раз при вставке новой записи в таблицу
+        public void onPrePersist(Artifact artifactEntity) { artifactEntity.uid(); } // А данный метод генерирует ID'шник)
     }
 }
