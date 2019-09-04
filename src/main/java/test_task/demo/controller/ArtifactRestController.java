@@ -38,7 +38,7 @@ public class ArtifactRestController {
     }
 
     // URL:
-    // http://localhost:8080/artifact?search=/search params/
+    // http://localhost:8080/artifact/search?search /search params/
     @GetMapping("/artifact/search")
     public List<Artifact> findAll(@RequestParam(value = "search", required = false) String search){
         List<SearchCriteria> params = new ArrayList<SearchCriteria>();
