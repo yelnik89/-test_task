@@ -1,14 +1,18 @@
 package test_task.demo.model;
 
-import org.dom4j.tree.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import java.text.MessageFormat;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
-@EntityListeners({ Artifact.AbstractEntityListener.class })
+@EntityListeners({AbstractEntityListener.class })
 public class Artifact {
 
     @Id
@@ -19,18 +23,35 @@ public class Artifact {
     private String category;
     private String description;
 
+//    @OneToMany(mappedBy = "", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "artifactID", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Set<Comment> comment = new HashSet<>();
 
-    protected Artifact(){}
 
-    public Artifact(Date created, String userID, String category, String description) {
-        this.created = created;
-        this.userID = userID;
-        this.category = category;
-        this.description = description;
-    }
+    public Artifact(){}
+
+//    public Artifact(Date created, String userID, String category, String description) {
+//        this.created = created;
+//        this.userID = userID;
+//        this.category = category;
+//        this.description = description;
+//    }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Set<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(Set<Comment> comment) {
+        this.comment = comment;
+    }
+
+    public String getId(){
+        return this.id;
     }
 
     public Date getCreated(){
@@ -57,12 +78,12 @@ public class Artifact {
         this.description = description;
     }
 
-    public String getCategory(){
-        return this.category;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getId(){
-        return this.id;
+    public String getCategory(){
+        return this.category;
     }
 
     @Override
@@ -77,10 +98,5 @@ public class Artifact {
         }
 
         return id;
-    }
-
-    public static class AbstractEntityListener {
-        @PrePersist // Аннотация PrePersist указывает, что данный метод будет выполняться каждый раз при вставке новой записи в таблицу
-        public void onPrePersist(Artifact artifactEntity) { artifactEntity.uid(); } // А данный метод генерирует ID'шник)
     }
 }
