@@ -8,8 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.text.MessageFormat;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Entity
 @EntityListeners({Artifact.AbstractEntityListener.class })
@@ -23,8 +21,7 @@ public class Artifact {
     private String category;
     private String description;
 
-//    @OneToMany(mappedBy = "", fetch = FetchType.LAZY)
-    @OneToMany(mappedBy = "artifactID", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "artifact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Comment> comment = new HashSet<>();
 

@@ -34,9 +34,9 @@ public class CommentRestController {
 
     @PostMapping(value = "/comment")
     @ResponseBody
-    public Comment addComment(@RequestBody Comment com) {
-        System.out.println("(Service Side) Creating comment: " + com.getId());
-        return commentService.create(com);
+    public Comment addComment(@RequestBody Comment comment) {
+        System.out.println("(Service Side) Creating comment: " + comment.getId());
+        return commentService.create(comment);
     }
 
     // URL:

@@ -1,6 +1,7 @@
 package test_task.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import test_task.demo.service.ArtifactService;
 
 import javax.persistence.*;
@@ -17,10 +18,10 @@ public class Comment {
     private String userID;
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)                         //объявляется тип связи, fetch - метод подгрузки (установлен ленивый)
+    @JoinColumn(referencedColumnName = "id", nullable = false) //указывает, на какое поле ссылается зависимость
     @JsonBackReference
-    @JoinColumn(referencedColumnName = "id", nullable = false)
-    private Artifact artifactID;
+    private Artifact artifact;
 
     public Comment(){}
 
@@ -32,12 +33,12 @@ public class Comment {
         return this.id;
     }
 
-    public Artifact getArtifactID() {
-        return artifactID;
+    public Artifact getArtifact() {
+        return artifact;
     }
 
-    public void setArtifactID(Artifact artifactID) {
-        this.artifactID = artifactID;
+    public void setArtifact(Artifact artifact) {
+        this.artifact = artifact;
     }
 
     public void setUserID(String id) {
