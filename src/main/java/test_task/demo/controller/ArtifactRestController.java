@@ -57,8 +57,9 @@ public class ArtifactRestController {
 
     @PostMapping(value = "/artifact")
     public ResponseEntity<Artifact> addArtifact(@RequestBody Artifact art) {
+        artifactService.create(art);
         System.out.println("(Service Side) Creating artifact: " + art.getId());
-        return ResponseEntity.ok(artifactService.create(art));
+        return ResponseEntity.ok(art);
     }
 
     // URL:
