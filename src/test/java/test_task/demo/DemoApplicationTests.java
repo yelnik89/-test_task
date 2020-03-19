@@ -17,21 +17,4 @@ public class DemoApplicationTests {
 	public void contextLoads() {
 	}
 
-//	@Autowired
-//	private TestEntityManager entityManager;
-//
-//	@Autowired
-//	private ArtifactService artifactService;
-//
-//	@Test
-//	public void whenFindByName_thenReturnEmployee(){
-//		//given
-//		Artifact art = new Artifact();
-//		artifactService.create(art);
-//		entityManager.persist(art);
-//		entityManager.flush();
-//
-//		//when
-//		Artifact result = artifactService.getArtifactById(art.getId());
-//	}
 }
